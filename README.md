@@ -45,8 +45,8 @@ The project relies on the following npm packages:
 `git clone https://github.com/redox132/allegroSendBoxAPi.git`
 `cd allegroSendBoxAPi`
 
-**`node install`** → should be **`npm install`**
-**`node rund dev`** → should be **`npm run dev`**  
+**`npm install`**
+**`npm run dev`**  
 
 
 ## Environment Setup
