@@ -62,7 +62,7 @@ const options = {
         },
         security: [{ BearerAuth: [] }],
         paths: {
-            "/offers": {
+            "/api/offers": {
                 get: {
                     summary: "Get all offers",
                     tags: ["Offers"],
@@ -82,7 +82,7 @@ const options = {
                     }
                 }
             },
-            "/offers/{id}": {
+            "/api/offers/{id}": {
                 get: {
                     summary: "Get a single offer by ID",
                     tags: ["Offers"],
