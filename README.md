@@ -32,6 +32,7 @@ The project relies on the following npm packages:
 - **body-parser** – Parses incoming request bodies  
 - **node-fetch** – Fetch API for Node.js  
 - **express-rate-limit** – Protects your API from excessive requests  
+... add more few ones
 
 > Note: The full list of dependencies is available in `package.json`.
 - You can simply hit: npm install and you are ready to go
@@ -48,17 +49,15 @@ cd allegrosandbox
 ## Environment Setup
 i have provided a .env.example for Environment Setup. It contains the following:
 
-ALLEGRO_CLIENT_ID=your_alegro_client_id
-ALLEGRO_CLIENT_SECRET=your_allegro_sercet
-ALLEGRO_REDIRECT_URI=http//site.com/Callback_url
+**can be found at allegro app**
+- **ALLEGRO_CLIENT_ID**=client_id
+- **ALLEGRO_CLIENT_SECRET**=client_secret
 
-# Use this URL ONLY to fetch token
-ALLEGRO_AUTH_BASE_URL=https://allegro.pl.allegrosandbox.pl
 
-# Use this URL for catalog/products API requests
-ALLEGRO_SANDBOX_BASE_URL=https://api.allegro.pl.allegrosandbox.pl
+- **ALLEGRO_AUTH_BASE_URL**=https://allegro.pl.allegrosandbox.pl
+- **ALLEGRO_SANDBOX_BASE_URL**=https://api.allegro.pl.allegrosandbox.pl
 
-PORT=3000
+- **ALLEGRO_REDIRECT_URI**=https://yourSite.com/callback
 
 ## Running the Server
 
