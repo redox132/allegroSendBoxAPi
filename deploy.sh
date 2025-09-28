@@ -1,7 +1,5 @@
 #!/bin/bash
-# A helper script to push changes to Git
 
-# Ensure a commit message is provided
 if [ -z "$1" ]; then
   echo "Usage: ./git_push_helper.sh \"Your commit message\""
   exit 1
@@ -28,5 +26,5 @@ git merge dev
 echo "Pushing main..."
 git push
 
-echo "Switching back to dev to continue coding..."
+echo "Switching back to dev to continue coding... 🤣🤣🤣🤣🥲🥲🥲🥲 "
 git checkout dev
