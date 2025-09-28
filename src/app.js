@@ -2,11 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import { setupSwagger } from "../setupSwagger.js";
 
-// Controllers
-import { login, callback } from "./controllers/authController.js";
-import { getAllOffers, getOffer, updateOffer } from "./controllers/offerController.js";
+import { login, callback, callbackValidators } from "./controllers/authController.js";
+import { getAllOffers, getOffer, updateOffer, offerIdValidator, updateOfferValidator } from "./controllers/offerController.js";
 
-// Middleware
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { apiLimiter } from "./middlewares/rateLimiter.js";
 
@@ -14,31 +12,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', 1);
 app.use(express.json());
-
-// Apply rate limiter to ALL routes
 app.use(apiLimiter);
 
 // Auth routes
 app.get("/login", login);
-app.get("/allegro/callback", callback);
+app.get("/allegro/callback", callbackValidators, callback);
 
-// Offer routes
 app.get("/offers", getAllOffers);
-app.get("/offers/:id", getOffer);
-app.patch("/offers/:id", updateOffer);
+app.get("/offers/:id", offerIdValidator, getOffer);
+app.patch("/offers/:id", offerIdValidator, updateOfferValidator, updateOffer);
 
-// Root
 app.get("/", (req, res) => {
-    res.send("👋 Visit <a href='/login'>Login</a> to authenticate with Allegro.");
+    res.send("Siema! Visit <a href='/login'>Login</a> to authenticate with Allegro. Or visit https://nontransforming-nell-robustly.ngrok-free.dev for fast testing. Check the API docs at /api-docs");
 });
 
-// Swagger
 setupSwagger(app);
-
-// Error handler (must be last)
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT} or visit https://nontransforming-nell-robustly.ngrok-free.dev. Check the API docs at /api-docs`);
 });

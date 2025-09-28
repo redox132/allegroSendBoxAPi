@@ -43,9 +43,9 @@ export async function refreshAccessTokenIfNeeded() {
             );
 
             await setTokens(res.data);
-            console.log("✅ Token refreshed automatically!");
+            console.log("Token refreshed automatically!");
         } catch (err) {
-            console.error("❌ Error refreshing token:", err.response?.data || err.message);
+            console.error("Error refreshing token:", err.response?.data || err.message);
             throw err;
         }
     }
