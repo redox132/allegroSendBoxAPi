@@ -1,6 +1,9 @@
 import { getOffers, getOfferById, updateOfferById } from "../services/allegroService.js";
 import { param, body, validationResult } from "express-validator";
 
+/**
+ * middleware to validate offer ID in route params
+ */
 export const offerIdValidator = [
     param("id").trim().escape().notEmpty().withMessage("Offer ID is required"),
     (req, res, next) => {
@@ -10,10 +13,12 @@ export const offerIdValidator = [
     },
 ];
 
+/**
+ * middleware to validate request body when updating an offer
+ */
 export const updateOfferValidator = [
     body("name").optional().trim().escape(),
 
-    // Validate sellingMode.price.amount
     body("sellingMode.price.amount")
         .optional()
         .isString()
@@ -21,7 +26,6 @@ export const updateOfferValidator = [
         .matches(/^\d+(\.\d{1,2})?$/)
         .withMessage("Price amount must be a valid number format, e.g., '123.45'"),
 
-    // Validate sellingMode.price.currency
     body("sellingMode.price.currency")
         .optional()
         .isString()
@@ -41,6 +45,10 @@ export const updateOfferValidator = [
     },
 ];
 
+/**
+ * Get all offers from Allegro API
+ * @route GET /offers
+ */
 export async function getAllOffers(req, res, next) {
     try {
         const data = await getOffers();
@@ -50,6 +58,10 @@ export async function getAllOffers(req, res, next) {
     }
 }
 
+/**
+ * get a single offer by ID
+ * @route GET /offers/:id
+ */
 export async function getOffer(req, res, next) {
     try {
         const offer = await getOfferById(req.params.id);
@@ -59,6 +71,10 @@ export async function getOffer(req, res, next) {
     }
 }
 
+/**
+ * update an offer by ID
+ * @route PATCH /offers/:id
+ */
 export async function updateOffer(req, res, next) {
     try {
         const updatedOffer = await updateOfferById(req.params.id, req.body);

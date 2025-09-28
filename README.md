@@ -3,8 +3,6 @@
 Allegro Sandbox API is a REST API for managing Allegro products safely.  
 It is a safe playground for developers to test their code before deploying to production.
 
----
-
 ## Table of Contents
 
 - [Project Overview](#project-overview)  
@@ -22,7 +20,6 @@ It is a safe playground for developers to test their code before deploying to pr
 
 This project allows developers to interact with a mock (Sendbox) Allegro API for product management. It provides endpoints for editing, and listing products.
 
----
 
 ## Dependencies
 
@@ -85,5 +82,5 @@ For the API docs, you cann access them as follows:
  - the reason why when you visit the "/login" and then you are automaticcaly authenticated is that i want you to test the app seamlessly and without attaching the Authorization header to the request every time. it also because i already included it. This why it would be easier to test. 
 
 ## Notes
- - if you hit /login and make some requests and you are wondering why it works without Autherization header. It is because the token is stored in the session and the roken is attached to the header. And this architecture could change based on the project. 
+ - if you hit /login and make some requests and you are wondering why it works without Autherization header. It is because the token is stored in the session and the roken is attached to the header. And this architecture could change based on the project. (after all the client (application) needs to perform operations on behalf of the user)
  

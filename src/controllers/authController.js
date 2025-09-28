@@ -2,6 +2,9 @@ import axios from "axios";
 import { setTokens } from "../services/tokenService.js";
 import { query, validationResult } from "express-validator";
 
+/**
+ * middleware to validate the presence of the authorization code in query params
+ */
 export const callbackValidators = [
     query("code").trim().escape().notEmpty().withMessage("Authorization code is required"),
     (req, res, next) => {
@@ -11,11 +14,19 @@ export const callbackValidators = [
     },
 ];
 
+/**
+ * redirects the user to Allegro's authorization page
+ * @route GET /login
+ */
 export async function login(req, res) {
     const authUrl = `${process.env.ALLEGRO_AUTH_BASE_URL}/auth/oauth/authorize?response_type=code&client_id=${process.env.ALLEGRO_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.ALLEGRO_REDIRECT_URI)}`;
     res.redirect(authUrl);
 }
 
+/**
+ * handles Allegro OAuth callback, exchanges authorization code for access/refresh tokens
+ * @route GET /allegro/callback
+ */
 export async function callback(req, res) {
     const authCode = req.query.code;
 

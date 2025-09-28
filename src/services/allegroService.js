@@ -1,6 +1,12 @@
 import axios from "axios";
 import { refreshAccessTokenIfNeeded } from "./tokenService.js";
 
+/**
+ * Fetch all offers from allegro sandbox API
+ * @async
+ * @returns {Promise<Object>} list of offers returned 
+ * @throws {Error} If access token is missing or request fails
+ */
 export async function getOffers() {
     try {
         const accessToken = await refreshAccessTokenIfNeeded();
@@ -20,6 +26,13 @@ export async function getOffers() {
     }
 }
 
+/**
+ * retrieve a single offer by ID from Allegro Sandbox API.
+ * @async
+ * @param {string} offerId - the ID of the offer to fetch
+ * @returns {Promise<Object>} offer details
+ * @throws {Error} if access token is missing or request fails
+ */
 export async function getOfferById(offerId) {
     try {
         const accessToken = await refreshAccessTokenIfNeeded();
@@ -39,6 +52,14 @@ export async function getOfferById(offerId) {
     }
 }
 
+/**
+ * update an existing offer by ID in Allegro Sandbox API
+ * @async
+ * @param {string} offerId - the ID of the offer to update
+ * @param {Object} updateData - fields to update (name, sellingMode.price, stock.available)
+ * @returns {Promise<Object>} updated offer data
+ * @throws {Error} if access token is missing, no update data provided, or request fails
+ */
 export async function updateOfferById(offerId, updateData = {}) {
     try {
         const accessToken = await refreshAccessTokenIfNeeded();
@@ -76,4 +97,3 @@ export async function updateOfferById(offerId, updateData = {}) {
         throw err;
     }
 }
-
