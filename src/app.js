@@ -21,30 +21,28 @@ app.use(cors({
 
 app.set('trust proxy', 1);
 app.use(express.json());
-app.use(cors()); // <-- enable CORS for all routes
+app.use(cors()); 
 app.use(apiLimiter);
 
-// Auth routes
 app.get("/login", login);
 app.get("/allegro/callback", callbackValidators, callback);
 
-// Offer routes
 app.get("/offers", getAllOffers);
 app.get("/offers/:id", offerIdValidator, getOffer);
 app.patch("/offers/:id", offerIdValidator, updateOfferValidator, updateOffer);
 
-// Root route
 app.get("/", (req, res) => {
     res.send("Siema! Visit <a href='/login'>Login</a> to authenticate with Allegro. Or visit https://nontransforming-nell-robustly.ngrok-free.dev for fast testing. Check the API docs at /api-docs");
 });
 
-// Swagger docs
 setupSwagger(app);
 
-// Error handler
 app.use(errorHandler);
 
-// Start server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT} or visit https://nontransforming-nell-robustly.ngrok-free.dev. Check the API docs at /api-docs`);
 });
+
+
+
+export default app;

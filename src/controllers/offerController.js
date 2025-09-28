@@ -12,8 +12,28 @@ export const offerIdValidator = [
 
 export const updateOfferValidator = [
     body("name").optional().trim().escape(),
-    body("sellingMode.price").optional().isNumeric().withMessage("Price must be a number"),
-    body("stock.available").optional().isInt({ min: 0 }).withMessage("Stock must be an integer >= 0"),
+
+    // Validate sellingMode.price.amount
+    body("sellingMode.price.amount")
+        .optional()
+        .isString()
+        .withMessage("Price amount must be a string")
+        .matches(/^\d+(\.\d{1,2})?$/)
+        .withMessage("Price amount must be a valid number format, e.g., '123.45'"),
+
+    // Validate sellingMode.price.currency
+    body("sellingMode.price.currency")
+        .optional()
+        .isString()
+        .withMessage("Currency must be a string")
+        .isLength({ min: 3, max: 3 })
+        .withMessage("Currency must be a 3-letter code"),
+
+    body("stock.available")
+        .optional()
+        .isInt({ min: 0 })
+        .withMessage("Stock must be an integer >= 0"),
+
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
