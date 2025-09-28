@@ -6,7 +6,7 @@ dotenv.config();
 let tokens = {
     access_token: null,
     refresh_token: null,
-    expires_at: null, // timestamp in ms
+    expires_at: null,
 };
 
 const basicAuth = Buffer.from(
@@ -16,7 +16,7 @@ const basicAuth = Buffer.from(
 export async function setTokens(newTokens) {
     tokens.access_token = newTokens.access_token;
     tokens.refresh_token = newTokens.refresh_token;
-    tokens.expires_at = Date.now() + newTokens.expires_in * 1000; // ms
+    tokens.expires_at = Date.now() + newTokens.expires_in * 1000;
 }
 
 export function getAccessToken() {
@@ -26,7 +26,6 @@ export function getAccessToken() {
 export async function refreshAccessTokenIfNeeded() {
     if (!tokens.refresh_token) return null;
 
-    // Refresh if token is missing or expired
     if (!tokens.access_token || Date.now() >= tokens.expires_at) {
         try {
             const res = await axios.post(

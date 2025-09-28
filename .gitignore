@@ -1,8 +1,3 @@
 node_modules
 package-lock.json
 .env
-getOffersUsingToken.js
-getRefreshToken.js
-getUserToken.js
-PATCH_OFFER.js
-POST_OFFER.js

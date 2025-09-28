@@ -1,5 +1,3 @@
-// AllegroAPI.js
-
 import axios from "axios";
 import { refreshAccessTokenIfNeeded } from "./tokenService.js";
 
@@ -22,7 +20,6 @@ export async function getOffers() {
     }
 }
 
-// Get a single offer by ID
 export async function getOfferById(offerId) {
     try {
         const accessToken = await refreshAccessTokenIfNeeded();
@@ -42,13 +39,11 @@ export async function getOfferById(offerId) {
     }
 }
 
-// Update offer by ID
 export async function updateOfferById(offerId, updateData = {}) {
     try {
         const accessToken = await refreshAccessTokenIfNeeded();
         if (!accessToken) throw new Error("No access token available");
 
-        // Build payload safely
         const payload = {};
 
         if (updateData.name) payload.name = updateData.name;
