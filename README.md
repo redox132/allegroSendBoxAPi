@@ -76,7 +76,7 @@ i have provided a .env.example for Environment Setup. It contains the following:
 For the API docs, you cann access them as follows:
  - if you have already installed the project and run it locally, visit: http://localhost:3000/api-docs 
  - if you have not run the project locally, visit: https://nontransforming-nell-robustly.ngrok-free.dev/api-docs
- - Postman also available for fast and easy testing: https://documenter.getpostman.com/view/47124316/2sB3QDwYk9#8146e004-ebb0-4fda-81c1-decd6700c979
+ - Postman also available for fast and easy testing: https://documenter.getpostman.com/view/47124316/2sB3QDwYk9
 
 ## Architecture decisions
  - the reason why when you visit the "/login" and then you are automaticcaly authenticated is that i want you to test the app seamlessly and without attaching the Authorization header to the request every time. it also because i already included it. This why it would be easier to test. 
